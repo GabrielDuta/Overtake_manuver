@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2022-08-22 14:46:57 by Eclipse SUMO netedit Version 1.12.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="intersection.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="intersection.net.xml"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
+    </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
+
+    <netedit>
+        <route-files value="/Users/segata/src/plexe/examples/intersectionMerging/sumocfg/intersection.rou.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<net version="1.9" junctionCornerDetail="5" limitTurnSpeed="5.50" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
+
+    <location netOffset="0.00,0.00" convBoundary="-500.00,-600.00,500.00,0.00" origBoundary="-10000000000.00,-10000000000.00,10000000000.00,10000000000.00" projParameter="!"/>
+
+    <edge id=":CENTER_0" function="internal">
+        <lane id=":CENTER_0_0" index="0" speed="13.89" length="14.40" shape="7.20,1.60 -7.20,1.60"/>
+    </edge>
+    <edge id=":CENTER_1" function="internal">
+        <lane id=":CENTER_1_0" index="0" speed="8.00" length="4.07" shape="7.20,1.60 3.35,1.05 3.20,0.96"/>
+    </edge>
+    <edge id=":CENTER_6" function="internal">
+        <lane id=":CENTER_6_0" index="0" speed="8.00" length="10.13" shape="3.20,0.96 0.60,-0.60 -1.05,-3.35 -1.60,-7.20"/>
+    </edge>
+    <edge id=":CENTER_2" function="internal">
+        <lane id=":CENTER_2_0" index="0" speed="6.51" length="9.03" shape="1.60,-7.20 1.95,-4.75 3.00,-3.00 4.75,-1.95 7.20,-1.60"/>
+    </edge>
+    <edge id=":CENTER_3" function="internal">
+        <lane id=":CENTER_3_0" index="0" speed="8.00" length="14.19" shape="1.60,-7.20 1.05,-3.35 -0.60,-0.60 -3.35,1.05 -7.20,1.60"/>
+    </edge>
+    <edge id=":CENTER_4" function="internal">
+        <lane id=":CENTER_4_0" index="0" speed="6.51" length="9.03" shape="-7.20,-1.60 -4.75,-1.95 -3.00,-3.00 -1.95,-4.75 -1.60,-7.20"/>
+    </edge>
+    <edge id=":CENTER_5" function="internal">
+        <lane id=":CENTER_5_0" index="0" speed="13.89" length="14.40" shape="-7.20,-1.60 7.20,-1.60"/>
+    </edge>
+
+    <edge id="-E_BOTTOM" from="CENTER" to="BOTTOM" priority="-1">
+        <lane id="-E_BOTTOM_0" index="0" speed="13.89" length="492.80" shape="-1.60,-7.20 -1.60,-600.00"/>
+    </edge>
+    <edge id="-E_LEFT" from="CENTER" to="LEFT" priority="-1">
+        <lane id="-E_LEFT_0" index="0" speed="13.89" length="492.80" shape="-7.20,1.60 -500.00,1.60"/>
+    </edge>
+    <edge id="-E_RIGHT" from="RIGHT" to="CENTER" priority="-1">
+        <lane id="-E_RIGHT_0" index="0" speed="13.89" length="492.80" shape="500.00,1.60 7.20,1.60"/>
+    </edge>
+    <edge id="E_BOTTOM" from="BOTTOM" to="CENTER" priority="-1">
+        <lane id="E_BOTTOM_0" index="0" speed="13.89" length="492.80" shape="1.60,-600.00 1.60,-7.20"/>
+    </edge>
+    <edge id="E_LEFT" from="LEFT" to="CENTER" priority="-1">
+        <lane id="E_LEFT_0" index="0" speed="13.89" length="492.80" shape="-500.00,-1.60 -7.20,-1.60"/>
+    </edge>
+    <edge id="E_RIGHT" from="CENTER" to="RIGHT" priority="-1">
+        <lane id="E_RIGHT_0" index="0" speed="13.89" length="492.80" shape="7.20,-1.60 500.00,-1.60"/>
+    </edge>
+
+    <junction id="BOTTOM" type="dead_end" x="0.00" y="-600.00" incLanes="-E_BOTTOM_0" intLanes="" shape="0.00,-600.00 -3.20,-600.00 0.00,-600.00"/>
+    <junction id="CENTER" type="priority" x="0.00" y="0.00" incLanes="-E_RIGHT_0 E_BOTTOM_0 E_LEFT_0" intLanes=":CENTER_0_0 :CENTER_6_0 :CENTER_2_0 :CENTER_3_0 :CENTER_4_0 :CENTER_5_0" shape="7.20,3.20 7.20,-3.20 4.98,-3.64 4.20,-4.20 3.64,-4.98 3.31,-5.98 3.20,-7.20 -3.20,-7.20 -3.64,-4.98 -4.20,-4.20 -4.98,-3.64 -5.98,-3.31 -7.20,-3.20 -7.20,3.20">
+        <request index="0" response="000000" foes="001000" cont="0"/>
+        <request index="1" response="110000" foes="111000" cont="1"/>
+        <request index="2" response="100000" foes="100000" cont="0"/>
+        <request index="3" response="100011" foes="100011" cont="0"/>
+        <request index="4" response="000000" foes="000010" cont="0"/>
+        <request index="5" response="000000" foes="001110" cont="0"/>
+    </junction>
+    <junction id="LEFT" type="dead_end" x="-500.00" y="0.00" incLanes="-E_LEFT_0" intLanes="" shape="-500.00,0.00 -500.00,3.20 -500.00,0.00"/>
+    <junction id="RIGHT" type="dead_end" x="500.00" y="0.00" incLanes="E_RIGHT_0" intLanes="" shape="500.00,0.00 500.00,-3.20 500.00,0.00"/>
+
+    <junction id=":CENTER_6_0" type="internal" x="3.20" y="0.96" incLanes=":CENTER_1_0 E_LEFT_0" intLanes=":CENTER_3_0 :CENTER_4_0 :CENTER_5_0"/>
+
+    <connection from="-E_RIGHT" to="-E_LEFT" fromLane="0" toLane="0" via=":CENTER_0_0" dir="s" state="M"/>
+    <connection from="-E_RIGHT" to="-E_BOTTOM" fromLane="0" toLane="0" via=":CENTER_1_0" dir="l" state="m"/>
+    <connection from="E_BOTTOM" to="E_RIGHT" fromLane="0" toLane="0" via=":CENTER_2_0" dir="r" state="m"/>
+    <connection from="E_BOTTOM" to="-E_LEFT" fromLane="0" toLane="0" via=":CENTER_3_0" dir="l" state="m"/>
+    <connection from="E_LEFT" to="-E_BOTTOM" fromLane="0" toLane="0" via=":CENTER_4_0" dir="r" state="M"/>
+    <connection from="E_LEFT" to="E_RIGHT" fromLane="0" toLane="0" via=":CENTER_5_0" dir="s" state="M"/>
+
+    <connection from=":CENTER_0" to="-E_LEFT" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":CENTER_1" to="-E_BOTTOM" fromLane="0" toLane="0" via=":CENTER_6_0" dir="l" state="m"/>
+    <connection from=":CENTER_6" to="-E_BOTTOM" fromLane="0" toLane="0" dir="l" state="M"/>
+    <connection from=":CENTER_2" to="E_RIGHT" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":CENTER_3" to="-E_LEFT" fromLane="0" toLane="0" dir="l" state="M"/>
+    <connection from=":CENTER_4" to="-E_BOTTOM" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":CENTER_5" to="E_RIGHT" fromLane="0" toLane="0" dir="s" state="M"/>
+
+</net>
