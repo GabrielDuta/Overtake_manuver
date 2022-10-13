@@ -87,6 +87,11 @@ BaseApp::~BaseApp()
     stopSimulation = nullptr;
 }
 
+BaseProtocol* BaseApp::getProtocol()
+{
+    return protocol;
+}
+
 void BaseApp::handleLowerMsg(cMessage* msg)
 {
     BaseFrame1609_4* frame = check_and_cast<BaseFrame1609_4*>(msg);

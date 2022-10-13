@@ -1,6 +1,5 @@
 //
 // Copyright (C) 2012-2022 Michele Segata <segata@ccs-labs.org>
-// Copyright (C) 2018-2022 Julian Heinovski <julian.heinovski@ccs-labs.org>
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -19,28 +18,14 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-package org.car2x.plexe.apps;
+import PlatooningBeacon;
 
-import org.car2x.plexe.apps.BaseApp;
-
-simple GeneralPlatooningApp like BaseApp {
-
-parameters:
-
-    // implementation of the join maneuver to be used
-    string joinManeuver;
-    // implementation of the platoons merge maneuver
-    string mergeManeuver;
-    // implementation of the intersection merge maneuver
-    string intersectionMergeManeuver;
-
-    int headerLength @unit("bit") = default(0 bit);
-    @display("i=block/app2");
-    @class(plexe::GeneralPlatooningApp);
-
-gates:
-    input lowerLayerIn;
-    output lowerLayerOut;
-    input lowerControlIn;
-    output lowerControlOut;
+packet IntersectionMergingBeacon extends PlatooningBeacon {
+    double fwdLeaderControllerAcceleration = 0;
+    double fwdLeaderAcceleration = 0;
+    double fwdLeaderSpeed = 0;
+    double fwdLastControllerAcceleration = 0;
+    double fwdLastAcceleration = 0;
+    double fwdLastSpeed = 0;
+    double fwdLastDistance = 0;
 }

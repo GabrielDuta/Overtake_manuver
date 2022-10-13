@@ -29,6 +29,7 @@
 #include "plexe/maneuver/JoinManeuver.h"
 #include "plexe/maneuver/JoinAtBack.h"
 #include "plexe/maneuver/MergeAtBack.h"
+#include "plexe/maneuver/IntersectionMergeManeuver.h"
 
 #include "plexe/messages/ManeuverMessage_m.h"
 #include "plexe/messages/UpdatePlatoonData_m.h"
@@ -74,6 +75,7 @@ public:
         , role(PlatoonRole::NONE)
         , joinManeuver(nullptr)
         , mergeManeuver(nullptr)
+        , intersectionMergeManeuver(nullptr)
     {
     }
 
@@ -122,6 +124,13 @@ public:
      * Depending on the implementation, this parameter might be ignored
      */
     void startMergeManeuver(int platoonId, int leaderId, int position);
+
+    /**
+     * Request start of the IntersectionMergeManeuver
+     * @param int platoonId id of the platoon in front of which we'll merge
+     * @param int leaderId of the leader of such platoon
+     */
+    void startIntersectionMergeManeuver(int platoonId, int leaderId);
 
     /** Abort join maneuver */
     void abortJoinManeuver();
@@ -267,6 +276,9 @@ public:
      */
     enum ACTIVE_CONTROLLER getTargetController();
 
+    /** used by maneuvers to schedule self messages, as they are not omnet modules */
+    virtual void scheduleSelfMsg(simtime_t t, cMessage* msg);
+
 protected:
     /** override this method of BaseApp. we want to handle it ourself */
     virtual void handleLowerMsg(cMessage* msg) override;
@@ -293,9 +305,6 @@ protected:
     /** used to receive the "retries exceeded" signal **/
     virtual void receiveSignal(cComponent* src, simsignal_t id, cObject* value, cObject* details) override;
 
-    /** used by maneuvers to schedule self messages, as they are not omnet modules */
-    virtual void scheduleSelfMsg(simtime_t t, cMessage* msg);
-
     BaseScenario* scenario;
 
 private:
@@ -305,6 +314,8 @@ private:
     JoinManeuver* joinManeuver;
     /** platoons merge maneuver implementation */
     JoinManeuver* mergeManeuver;
+    /** intersection merge maneuver implementation */
+    IntersectionMergeManeuver* intersectionMergeManeuver;
 };
 
 } // namespace plexe

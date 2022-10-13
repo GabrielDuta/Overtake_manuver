@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-// Copyright (C) 2019-2022 Michele Segata <segata@ccs-labs.org>
-//
-// Documentation for these modules is at http://veins.car2x.org/
+// Copyright (C) 2011 Christoph Sommer <sommer@ccs-labs.org>
 //
 // SPDX-License-Identifier: (GPL-2.0-or-later OR CC-BY-SA-4.0)
 //
@@ -31,28 +29,18 @@
 // work.  If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
 -->
 
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.sf.net/xsd/sumoConfiguration.xsd">
-
-    <input>
-        <net-file value="intersectionnew.net.xml"/>
-        <route-files value="intersectionnew.rou.xml"/>
-        <additional-files value="intersectionnew.add.xml"/>
-    </input>
-
-    <time>
-        <begin value="0"/>
-        <end value="81600"/>
-        <step-length value="0.01"/>
-    </time>
-    <processing>
-        <step-method.ballistic value="true"/>
-        <collision.action value="remove"/>
-        <collision.stoptime value="10"/>
-    </processing>
-
-    <gui_only>
-        <start value="true"/>
-        <gui-settings-file value="intersection.gui.xml"/>
-    </gui_only>
-
-</configuration>
+<root>
+    <AnalogueModels>
+        <AnalogueModel type="SimplePathlossModel" thresholding="true">
+            <parameter name="alpha" type="double" value="2.0"/>
+            <parameter name="carrierFrequency" type="double" value="5.890e+9"/>
+        </AnalogueModel>
+        <!--<AnalogueModel type="TwoRayInterferenceModel">
+            <parameter name="DielectricConstant" type="double" value="1.02"/>
+        </AnalogueModel>-->
+    </AnalogueModels>
+    <Decider type="Decider80211p">
+        <!-- The center frequency on which the phy listens-->
+        <parameter name="centerFrequency" type="double" value="5.890e9"/>
+    </Decider>
+</root>

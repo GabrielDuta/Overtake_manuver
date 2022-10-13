@@ -59,6 +59,12 @@ void GeneralPlatooningApp::initialize(int stage)
         else
             throw new cRuntimeError("Invalid merge maneuver implementation chosen");
 
+        std::string intersectionMergeManeuverName = par("intersectionMergeManeuver").stdstringValue();
+        if (intersectionMergeManeuverName == "IntersectionMergeManeuver")
+            intersectionMergeManeuver = new IntersectionMergeManeuver(this);
+        else
+            throw new cRuntimeError("Invalid intersection merge maneuver implementation chosen");
+
         if (positionHelper->isLeader()) setPlatoonRole(PlatoonRole::LEADER);
         else setPlatoonRole(PlatoonRole::FOLLOWER);
 
@@ -70,6 +76,7 @@ void GeneralPlatooningApp::handleSelfMsg(cMessage* msg)
 {
     if (joinManeuver && joinManeuver->handleSelfMsg(msg)) return;
     if (mergeManeuver && mergeManeuver->handleSelfMsg(msg)) return;
+    if (intersectionMergeManeuver && intersectionMergeManeuver->handleSelfMsg(msg)) return;
     BaseApp::handleSelfMsg(msg);
 }
 
@@ -127,6 +134,17 @@ void GeneralPlatooningApp::startMergeManeuver(int platoonId, int leaderId, int p
     params.leaderId = leaderId;
     params.position = position;
     mergeManeuver->startManeuver(&params);
+}
+
+void GeneralPlatooningApp::startIntersectionMergeManeuver(int platoonId, int leaderId)
+{
+    ASSERT(getPlatoonRole() == PlatoonRole::LEADER);
+    ASSERT(!isInManeuver());
+
+    IntersectionMergeManeuverParameters params;
+    params.platoonId = platoonId;
+    params.leaderId = leaderId;
+    intersectionMergeManeuver->startManeuver(&params);
 }
 
 void GeneralPlatooningApp::sendUnicast(cPacket* msg, int destination)
@@ -208,6 +226,7 @@ void GeneralPlatooningApp::onPlatoonBeacon(const PlatooningBeacon* pb)
 {
     joinManeuver->onPlatoonBeacon(pb);
     mergeManeuver->onPlatoonBeacon(pb);
+    intersectionMergeManeuver->onPlatoonBeacon(pb);
     // maintain platoon
     BaseApp::onPlatoonBeacon(pb);
 }
@@ -220,6 +239,7 @@ void GeneralPlatooningApp::onManeuverMessage(ManeuverMessage* mm)
     else {
         joinManeuver->onManeuverMessage(mm);
         mergeManeuver->onManeuverMessage(mm);
+        intersectionMergeManeuver->onManeuverMessage(mm);
     }
     delete mm;
 }
@@ -266,14 +286,20 @@ void GeneralPlatooningApp::receiveSignal(cComponent* src, simsignal_t id, cObjec
         BaseFrame1609_4* frame = check_and_cast<BaseFrame1609_4*>(value);
         ManeuverMessage* mm = check_and_cast<ManeuverMessage*>(frame->getEncapsulatedPacket());
         if (frame) {
-            joinManeuver->onFailedTransmissionAttempt(mm);
-            mergeManeuver->onFailedTransmissionAttempt(mm);
+            if (activeManeuver == joinManeuver)
+                joinManeuver->onFailedTransmissionAttempt(mm);
+            if (activeManeuver == mergeManeuver)
+                mergeManeuver->onFailedTransmissionAttempt(mm);
+            if (activeManeuver == intersectionMergeManeuver)
+                intersectionMergeManeuver->onFailedTransmissionAttempt(mm);
         }
     }
 }
 
 void GeneralPlatooningApp::scheduleSelfMsg(simtime_t t, cMessage* msg)
 {
+    Enter_Method_Silent();
+    take(msg);
     scheduleAt(t, msg);
 }
 
@@ -281,6 +307,7 @@ GeneralPlatooningApp::~GeneralPlatooningApp()
 {
     delete joinManeuver;
     delete mergeManeuver;
+    delete intersectionMergeManeuver;
 }
 
 } // namespace plexe

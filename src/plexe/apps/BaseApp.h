@@ -38,6 +38,8 @@ class BaseApp : public veins::BaseApplLayer {
 public:
     virtual void initialize(int stage) override;
 
+    BaseProtocol* getProtocol();
+
 protected:
     // id of this vehicle
     int myId;

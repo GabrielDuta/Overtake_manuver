@@ -1,6 +1,5 @@
 //
 // Copyright (C) 2012-2022 Michele Segata <segata@ccs-labs.org>
-// Copyright (C) 2018-2022 Julian Heinovski <julian.heinovski@ccs-labs.org>
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -19,28 +18,35 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-package org.car2x.plexe.apps;
+#pragma once
 
-import org.car2x.plexe.apps.BaseApp;
+#include "plexe/scenarios/ManeuverScenario.h"
+#include "plexe/apps/GeneralPlatooningApp.h"
+#include "plexe/messages/ManeuverMessage_m.h"
+#include "plexe/utilities/DynamicPositionManager.h"
+#include "plexe/maneuver/IntersectionMergeManeuver.h"
 
-simple GeneralPlatooningApp like BaseApp {
+namespace plexe {
 
-parameters:
+class IntersectionMergeScenario : public ManeuverScenario {
 
-    // implementation of the join maneuver to be used
-    string joinManeuver;
-    // implementation of the platoons merge maneuver
-    string mergeManeuver;
-    // implementation of the intersection merge maneuver
-    string intersectionMergeManeuver;
+public:
+    virtual void initialize(int stage) override;
+    virtual void handleSelfMsg(cMessage* msg) override;
 
-    int headerLength @unit("bit") = default(0 bit);
-    @display("i=block/app2");
-    @class(plexe::GeneralPlatooningApp);
+public:
+    IntersectionMergeScenario()
+        :positions(DynamicPositionManager::getInstance())
+    {
+    }
 
-gates:
-    input lowerLayerIn;
-    output lowerLayerOut;
-    input lowerControlIn;
-    output lowerControlOut;
-}
+protected:
+
+    void prepareManeuverCars();
+    void setupFormation();
+
+    // used to retrieve the initial formation setup
+    DynamicPositionManager& positions;
+};
+
+} // namespace plexe

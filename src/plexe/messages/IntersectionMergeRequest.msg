@@ -19,28 +19,11 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-package org.car2x.plexe.apps;
+import ManeuverMessage;
 
-import org.car2x.plexe.apps.BaseApp;
-
-simple GeneralPlatooningApp like BaseApp {
-
-parameters:
-
-    // implementation of the join maneuver to be used
-    string joinManeuver;
-    // implementation of the platoons merge maneuver
-    string mergeManeuver;
-    // implementation of the intersection merge maneuver
-    string intersectionMergeManeuver;
-
-    int headerLength @unit("bit") = default(0 bit);
-    @display("i=block/app2");
-    @class(plexe::GeneralPlatooningApp);
-
-gates:
-    input lowerLayerIn;
-    output lowerLayerOut;
-    input lowerControlIn;
-    output lowerControlOut;
+// Request to merge in an intersection
+// Is sent from a possible a platoon that wants to enter an intersection
+packet IntersectionMergeRequest extends ManeuverMessage {
+    // used to let the incoming platoon who is the last in my platoon 
+    int lastVehicleId;
 }

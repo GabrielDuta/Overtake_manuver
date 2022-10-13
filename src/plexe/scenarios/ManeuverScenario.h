@@ -39,7 +39,7 @@ public:
 
     virtual void initialize(int stage) override;
 
-    enum ACTIVE_CONTROLLER getTargetController() const;
+    enum ACTIVE_CONTROLLER getTargetController () const;
 
 private:
 public:
