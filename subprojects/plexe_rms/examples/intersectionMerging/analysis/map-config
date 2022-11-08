@@ -1,0 +1,12 @@
+#default setup
+[default]
+module = Intersection.node[*].prot
+names = antennaId,antennaGain,antennaDistance,antennaPower,phiR,thetaR,phiI,thetaI
+2 = runNumber
+
+[intersectionMerge]
+module = Intersection.node[*].appl
+names = nodeId,distance,relativeSpeed,speed,acceleration,controllerAcceleration,virtualDistance,posx,posy
+2 = runNumber
+3 = shadowing
+4 = useRms

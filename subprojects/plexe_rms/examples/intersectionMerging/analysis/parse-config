@@ -1,0 +1,22 @@
+[DEFAULT]
+defaultMap = default
+file = map-config
+
+[params]
+resdir = ../results
+
+[config]
+config = RMSTesting
+out = GainDistance
+map    = %(defaultMap)s
+mapFile = %(file)s
+prefix = gd
+merge = 1
+
+[config]
+config = IntersectionMerge
+out = IntersectionMerge
+map    = intersectionMerge
+mapFile = %(file)s
+prefix = im
+merge = 1
