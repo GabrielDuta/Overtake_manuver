@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2020-2022 Michele Segata <segata@ccs-labs.org>
+// Copyright (C) 2012-2022 Michele Segata <segata@ccs-labs.org>
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -18,29 +18,20 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-#pragma once
+package org.car2x.plexe.subprojects.plexe_rms;
 
-#include <string>
+import org.car2x.plexe.protocols.IntersectionMergingBeaconing;
 
-namespace plexe {
+//
+// Define static beaconing for platooning
+//
+simple IntersectionMergingBeaconingLogging extends IntersectionMergingBeaconing
+{
+    parameters:
+    
+    	bool disableBeaconing = default(false);
+    	bool useRms = default(false);
+        @display("i=block/network2");
+        @class(plexe::IntersectionMergingBeaconingLogging);
 
-enum PlexeRadioInterfaces {
-    // up to 16 interfaces
-    ALL = 65535,
-    VEINS_11P = 1,
-    LTE_CV2X_MODE3 = 2,
-    VEINS_VLC_FRONT = 4,
-    VEINS_VLC_BACK = 8,
-    VEINS_RMS = 16,
-};
-
-class PlexeRadioDriverInterface {
-public:
-    PlexeRadioDriverInterface(){};
-    virtual ~PlexeRadioDriverInterface(){};
-
-    // returns the type of the device which is used by the protocols to choose the proper radio interface
-    virtual int getDeviceType() = 0;
-};
-
-} /* namespace plexe */
+}

@@ -69,7 +69,16 @@ void GeneralPlatooningApp::initialize(int stage)
         else setPlatoonRole(PlatoonRole::FOLLOWER);
 
         scenario = FindModule<BaseScenario*>::findSubModule(getParentModule());
+
+        virtualDistanceOut.setName("virtualDistance");
     }
+}
+
+void GeneralPlatooningApp::logVehicleData(bool crashed)
+{
+    if (intersectionMergeManeuver)
+        virtualDistanceOut.record(intersectionMergeManeuver->getVirtualDistance());
+    BaseApp::logVehicleData(crashed);
 }
 
 void GeneralPlatooningApp::handleSelfMsg(cMessage* msg)

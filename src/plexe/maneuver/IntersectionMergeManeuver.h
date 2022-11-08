@@ -58,6 +58,8 @@ public:
 
     virtual void onFailedTransmissionAttempt(const ManeuverMessage* mm) override {};
 
+    double getVirtualDistance();
+
 protected:
 
     IntersectionMergingBeaconing* prot = nullptr;
@@ -86,6 +88,9 @@ protected:
     int platoonBLeader = -1;
     int platoonCLeader = -1;
     int platoonCLast = -1;
+
+    // distance to the front vehicle fed to the FAKE_CACC controller
+    double virtualDistance = -1e6;
 
     struct FollowerPlatoonData {
         int platoonId;

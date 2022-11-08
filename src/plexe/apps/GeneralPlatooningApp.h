@@ -307,6 +307,10 @@ protected:
 
     BaseScenario* scenario;
 
+    cOutVector virtualDistanceOut;
+    // override method to add additional output
+    virtual void logVehicleData(bool crashed) override;
+
 private:
     /** the role of this vehicle */
     PlatoonRole role;

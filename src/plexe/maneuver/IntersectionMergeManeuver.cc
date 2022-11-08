@@ -186,6 +186,7 @@ void IntersectionMergeManeuver::onPlatoonBeacon(const PlatooningBeacon* pb)
                 double distance, relSpeed;
                 plexeTraciVehicle->getRadarMeasurements(distance, relSpeed);
                 plexeTraciVehicle->setFrontVehicleFakeData(pb->getControllerAcceleration(), pb->getAcceleration(), pb->getSpeed(), distance);
+                virtualDistance = distance;
             }
         }
         /**
@@ -201,7 +202,8 @@ void IntersectionMergeManeuver::onPlatoonBeacon(const PlatooningBeacon* pb)
                     double distance, relSpeed;
                     plexeTraciVehicle->setLeaderVehicleFakeData(pb->getControllerAcceleration(), pb->getAcceleration(), pb->getSpeed());
                     plexeTraciVehicle->getRadarMeasurements(distance, relSpeed);
-                    plexeTraciVehicle->setFrontVehicleFakeData(msg->getFwdLastControllerAcceleration(), msg->getFwdLastAcceleration(), msg->getFwdLastSpeed(), distance - msg->getFwdLastDistance() - 5);
+                    virtualDistance = distance - msg->getFwdLastDistance() - 5;
+                    plexeTraciVehicle->setFrontVehicleFakeData(msg->getFwdLastControllerAcceleration(), msg->getFwdLastAcceleration(), msg->getFwdLastSpeed(), virtualDistance);
                     // VEHICLE_DATA data;
                     // plexeTraciVehicle->getVehicleData(&data);
                     // double position = traciVehicle->getLanePosition();
@@ -225,6 +227,7 @@ void IntersectionMergeManeuver::onPlatoonBeacon(const PlatooningBeacon* pb)
             if (pb->getVehicleId() == platoonCLast) {
                 double distance, relSpeed;
                 plexeTraciVehicle->getRadarMeasurements(distance, relSpeed);
+                virtualDistance = distance;
                 plexeTraciVehicle->setFrontVehicleFakeData(pb->getControllerAcceleration(), pb->getAcceleration(), pb->getSpeed(), distance);
             }
         }
@@ -265,7 +268,8 @@ void IntersectionMergeManeuver::onPlatoonBeacon(const PlatooningBeacon* pb)
         std::string edge = traciVehicle->getRoadId();
         double distanceToIntersection = traci->getDistanceRoad(edge, position, "RIGHT_1", 0, true);
         plexeTraciVehicle->setLeaderVehicleFakeData(msg->getFwdLeaderControllerAcceleration(), msg->getFwdLeaderAcceleration(), msg->getFwdLeaderSpeed());
-        plexeTraciVehicle->setFrontVehicleFakeData(msg->getFwdLastControllerAcceleration(), msg->getFwdLastAcceleration(), msg->getFwdLastSpeed(), distanceToIntersection + msg->getFwdLastDistance());
+        virtualDistance = distanceToIntersection + msg->getFwdLastDistance();
+        plexeTraciVehicle->setFrontVehicleFakeData(msg->getFwdLastControllerAcceleration(), msg->getFwdLastAcceleration(), msg->getFwdLastSpeed(), virtualDistance);
 
         // VEHICLE_DATA data;
         // plexeTraciVehicle->getVehicleData(&data);
@@ -288,10 +292,18 @@ void IntersectionMergeManeuver::onPlatoonBeacon(const PlatooningBeacon* pb)
         if (pb->getVehicleId() == platoonALast) {
             double distance, relSpeed;
             plexeTraciVehicle->getRadarMeasurements(distance, relSpeed);
+            virtualDistance = distance;
             plexeTraciVehicle->setFrontVehicleFakeData(pb->getControllerAcceleration(), pb->getAcceleration(), pb->getSpeed(), distance);
         }
     }
 
+}
+
+double IntersectionMergeManeuver::getVirtualDistance()
+{
+    double vd = virtualDistance;
+    virtualDistance = -1e6;
+    return vd;
 }
 
 } // namespace plexe

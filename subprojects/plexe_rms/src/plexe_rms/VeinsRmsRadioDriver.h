@@ -20,27 +20,22 @@
 
 #pragma once
 
-#include <string>
+#include "veins/base/modules/BaseApplLayer.h"
+#include "plexe/driver/PlexeRadioDriverInterface.h"
 
 namespace plexe {
 
-enum PlexeRadioInterfaces {
-    // up to 16 interfaces
-    ALL = 65535,
-    VEINS_11P = 1,
-    LTE_CV2X_MODE3 = 2,
-    VEINS_VLC_FRONT = 4,
-    VEINS_VLC_BACK = 8,
-    VEINS_RMS = 16,
-};
+class VeinsRmsRadioDriver : public PlexeRadioDriverInterface, public veins::BaseApplLayer {
 
-class PlexeRadioDriverInterface {
 public:
-    PlexeRadioDriverInterface(){};
-    virtual ~PlexeRadioDriverInterface(){};
+    bool registerNode(int nodeId);
+    virtual int getDeviceType() override
+    {
+        return PlexeRadioInterfaces::VEINS_RMS;
+    }
 
-    // returns the type of the device which is used by the protocols to choose the proper radio interface
-    virtual int getDeviceType() = 0;
+protected:
+    virtual void handleLowerMsg(cMessage* msg) override;
+    virtual void handleUpperMsg(cMessage* msg) override;
 };
-
-} /* namespace plexe */
+} // namespace plexe
