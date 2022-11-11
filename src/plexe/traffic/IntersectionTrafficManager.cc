@@ -79,14 +79,6 @@ void IntersectionTrafficManager::handleSelfMsg(cMessage* msg)
 void IntersectionTrafficManager::insertPlatoons()
 {
 
-    veins::Coord intersection = commandInterface->junction("CENTER").getPosition();
-    std::list<veins::Coord> coords;
-    coords.push_back(veins::Coord(intersection.x-5, intersection.y-5));
-    coords.push_back(veins::Coord(intersection.x-5, intersection.y+5));
-    coords.push_back(veins::Coord(intersection.x+5, intersection.y+5));
-    coords.push_back(veins::Coord(intersection.x+5, intersection.y-5));
-    commandInterface->addPolygon("intersection", "inttype", veins::TraCIColor(0, 0, 255, 255), true, 0, coords);
-
     // compute intervehicle distance
     double distance = platoonInsertSpeed / 3.6 * platoonInsertHeadway + platoonInsertDistance;
     // length of 1 platoon
