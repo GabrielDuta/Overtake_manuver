@@ -31,7 +31,7 @@ enum PlexeRadioInterfaces {
     LTE_CV2X_MODE3 = 2,
     VEINS_VLC_FRONT = 4,
     VEINS_VLC_BACK = 8,
-    VEINS_RMS = 16,
+    VEINS_RIS = 16,
 };
 
 class PlexeRadioDriverInterface {

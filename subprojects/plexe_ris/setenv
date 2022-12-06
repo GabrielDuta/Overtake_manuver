@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/echo Error. Aborting. Instead of running this script, please use: source
 
 #
-# Copyright (C) 2020 Christoph Sommer <sommer@cms-labs.org>
+# Copyright (C) 2020 Christoph Sommer <sommer@ccs-labs.org>
 #
 # Documentation for these modules is at http://veins.car2x.org/
 #
@@ -22,14 +22,14 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 
-echo "WARNING: the run script is deprecated in favor of bin/plexe_rms_run. Redirecting." >&2
-echo "WARNING: the run script is deprecated in favor of bin/plexe_rms_run. Redirecting."
+# Check if called from Plexe RIS directory
+test -f print-plexe_ris-version >/dev/null 2>&1
+if [ "$?" -ne 0 ]; then
+	echo 'Error: current working directory does not look like a Plexe RIS root directory. Aborting.' >&2
+	return 1
+fi
 
-test -f $(dirname "$0")/bin/plexe_rms_run || echo "ERROR: bin/plexe_rms_run does not exist; this will likely fail. Did you run 'make bin/plexe_rms_run'?" >&2
-test -f $(dirname "$0")/bin/plexe_rms_run || echo "ERROR: bin/plexe_rms_run does not exist; this will likely fail. Did you run 'make bin/plexe_rms_run'?"
-
-$(dirname "$0")/bin/plexe_rms_run "$@"
-
-echo "WARNING: the run script is deprecated in favor of bin/plexe_rms_run. Redirection done." >&2
-echo "WARNING: the run script is deprecated in favor of bin/plexe_rms_run. Redirection done."
+# Add Veins directory to PATH
+PLEXE_RIS_DIR="$(pwd)"
+export PATH="$PATH":"$PLEXE_RIS_DIR/bin"
 

@@ -21,8 +21,8 @@
 
 import org.car2x.plexe.PlexeScenario;
 import org.car2x.veins.modules.obstacle.ObstacleControl;
-import org.car2x.veinsrms.Rms;
-import org.car2x.veinsrms.RmsConnectionManager;
+import org.car2x.veinsris.Ris;
+import org.car2x.veinsris.RisConnectionManager;
 import org.car2x.veins.visualizer.roads.RoadsCanvasVisualizer;
 
 network Intersection extends PlexeScenario
@@ -33,13 +33,13 @@ network Intersection extends PlexeScenario
         obstacles: ObstacleControl if useBuildingShadowing {
             @display("p=240,50");
         }
-		obstaclesRms: ObstacleControl {
+		obstaclesRis: ObstacleControl {
            @display("p=240,50");
         }
-        rms: Rms {
+        ris: Ris {
         	@display("i=block/broadcast");
         }
-        rmsConnectionManager: RmsConnectionManager {
+        risConnectionManager: RisConnectionManager {
         	parameters:
                 @display("p=300,0;i=abstract/multicast");
         }

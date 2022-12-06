@@ -23,7 +23,7 @@
 #
 
 """
-Runs Plexe RMS simulation in current directory
+Runs Plexe RIS simulation in current directory
 """
 
 from __future__ import print_function
@@ -38,7 +38,7 @@ def relpath(s):
     veins_root = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
     return os.path.relpath(os.path.join(veins_root, s), '.')
 
-parser = argparse.ArgumentParser('Run a Plexe RMS simulation')
+parser = argparse.ArgumentParser('Run a Plexe RIS simulation')
 parser.add_argument('-d', '--debug', action='store_true', help='Set --mode=debug (deprecated in favor of --mode)')
 parser.add_argument('-M', '--mode', metavar='MODE', dest='mode', choices=['', 'release', 'debug', 'sanitize'], help='Instead of opp_run, use opp_run_VARIANT corresponding to MODE (release, debug, sanitize)')
 parser.add_argument('-t', '--tool', metavar='TOOL', dest='tool', choices=['lldb', 'gdb', 'memcheck', 'callgrind'], help='Wrap opp_run execution in TOOL (lldb, gdb, memcheck, or callgrind)')

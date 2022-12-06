@@ -20,8 +20,8 @@
 
 #include "IntersectionMergingBeaconingLogging.h"
 #include "veins/base/phyLayer/PhyToMacControlInfo.h"
-#include "veins-rms/DeciderResultRms.h"
-#include "veins-rms/PhyLayerRms.h"
+#include "veins-ris/DeciderResultRis.h"
+#include "veins-ris/PhyLayerRis.h"
 #include "plexe/maneuver/IntersectionMergeManeuver.h"
 using namespace veins;
 
@@ -44,7 +44,7 @@ void IntersectionMergingBeaconingLogging::initialize(int stage)
         phiIOut.setName("phiI");
         thetaIOut.setName("thetaI");
 
-        useRms = par("useRms");
+        useRis = par("useRis");
 
     }
     if (stage == 1) {
@@ -56,16 +56,16 @@ void IntersectionMergingBeaconingLogging::initialize(int stage)
 
 void IntersectionMergingBeaconingLogging::sendPlatooningMessage(int destinationAddress, enum PlexeRadioInterfaces interfaces)
 {
-    if (useRms) {
-        // only leaders of platoons B and C should use the RMS
+    if (useRis) {
+        // only leaders of platoons B and C should use the RIS
         if ((positionHelper->getPlatoonId() == PLATOON_ID_B && positionHelper->isLeader()) || (positionHelper->getPlatoonId() == PLATOON_ID_C && positionHelper->isLeader())) {
-            // update my position at the RMS, so it can be reconfigured
-            PhyLayerRms* rms = dynamic_cast<PhyLayerRms*>(findModuleByPath("Intersection.rms.nicRms.phyRms"));
-            rms->updateVehiclePosition(myId, mobility->getPositionAt(simTime()));
+            // update my position at the RIS, so it can be reconfigured
+            PhyLayerRis* ris = dynamic_cast<PhyLayerRis*>(findModuleByPath("Intersection.ris.nicRis.phyRis"));
+            ris->updateVehiclePosition(myId, mobility->getPositionAt(simTime()));
             if (positionHelper->getPlatoonId() == PLATOON_ID_B)
-                rms->requestReconfiguration(myId, positions.getMemberId(PLATOON_ID_C, 0));
+                ris->requestReconfiguration(myId, positions.getMemberId(PLATOON_ID_C, 0));
             else
-                rms->requestReconfiguration(myId, positions.getMemberId(PLATOON_ID_B, 0));
+                ris->requestReconfiguration(myId, positions.getMemberId(PLATOON_ID_B, 0));
             BaseProtocol::sendPlatooningMessage(destinationAddress, interfaces);
             return;
         }
@@ -75,18 +75,18 @@ void IntersectionMergingBeaconingLogging::sendPlatooningMessage(int destinationA
 
 void IntersectionMergingBeaconingLogging::messageReceived(PlatooningBeacon* pkt, BaseFrame1609_4* frame, enum PlexeRadioInterfaces interface)
 {
-    if (interface == PlexeRadioInterfaces::VEINS_RMS && pkt->getVehicleId() != myId) {
+    if (interface == PlexeRadioInterfaces::VEINS_RIS && pkt->getVehicleId() != myId) {
 
         double position = traciVehicle->getLanePosition();
         std::string edge = traciVehicle->getRoadId();
         double distanceToIntersection = traci->getDistanceRoad(edge, position, "RIGHT_1", 0, true);
 
         PhyToMacControlInfo* ctrl = check_and_cast<PhyToMacControlInfo*>(frame->getControlInfo());
-        DeciderResultRms* res = check_and_cast<DeciderResultRms*>(ctrl->getDeciderResult());
+        DeciderResultRis* res = check_and_cast<DeciderResultRis*>(ctrl->getDeciderResult());
         if (!res->getReflected())
             return;
         antennaIdOut.record(myId);
-        antennaGainOut.record(res->getGain());
+        antennaGainOut.record(res->getGains()[0]);
         antennaDistanceOut.record(distanceToIntersection);
         antennaPowerOut.record(res->getRecvPower_dBm());
         phiROut.record(res->getPhiR());

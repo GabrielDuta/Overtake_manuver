@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2019 Christoph Sommer <sommer@ccs-labs.org>
+// Copyright (C) 2012-2022 Michele Segata <segata@ccs-labs.org>
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -18,26 +18,20 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-#pragma once
+package org.car2x.plexe.subprojects.plexe_ris;
 
-#include "plexe/plexe.h"
+import org.car2x.plexe.protocols.IntersectionMergingBeaconing;
 
-// Version number of last release ("major.minor.patch") or an alpha version, if nonzero
-#define PLEXE_RMS_VERSION_MAJOR 3
-#define PLEXE_RMS_VERSION_MINOR 1
-#define PLEXE_RMS_VERSION_PATCH 0
-#define PLEXE_RMS_VERSION_ALPHA 0
+//
+// Define static beaconing for platooning
+//
+simple IntersectionMergingBeaconingLogging extends IntersectionMergingBeaconing
+{
+    parameters:
+    
+    	bool disableBeaconing = default(false);
+    	bool useRis = default(false);
+        @display("i=block/network2");
+        @class(plexe::IntersectionMergingBeaconingLogging);
 
-// Explicitly check Plexe version number
-#if !(PLEXE_VERSION_MAJOR == 3 && PLEXE_VERSION_MINOR >= 0)
-#error Plexe version 3.0 or compatible required
-#endif
-
-// PLEXE_RMS_API macro. Allows us to use the same .h files for both building a .dll and linking against it
-#if defined(PLEXE_RMS_EXPORT)
-#define PLEXE_RMS_API OPP_DLLEXPORT
-#elif defined(PLEXE_RMS_IMPORT)
-#define PLEXE_RMS_API OPP_DLLIMPORT
-#else
-#define PLEXE_RMS_API
-#endif
+}

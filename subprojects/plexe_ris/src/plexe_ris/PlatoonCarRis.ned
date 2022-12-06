@@ -19,7 +19,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-package org.car2x.plexe.subprojects.plexe_rms;
+package org.car2x.plexe.subprojects.plexe_ris;
 
 import org.car2x.veins.base.modules.IBaseApplLayer;
 import org.car2x.veins.modules.mobility.traci.TraCIMobility;
@@ -32,10 +32,10 @@ import org.car2x.plexe.apps.BaseApp;
 import org.car2x.veins.modules.nic.Nic80211p;
 import org.car2x.plexe.driver.Veins11pRadioDriver;
 
-import org.car2x.plexe.subprojects.plexe_rms.VeinsRmsRadioDriver;
-import org.car2x.veinsrms.NicRms;
+import org.car2x.plexe.subprojects.plexe_ris.VeinsRisRadioDriver;
+import org.car2x.veinsris.NicRis;
 
-module PlatoonCarRms
+module PlatoonCarRis
 {
     parameters:
         string scenario_type;
@@ -45,7 +45,7 @@ module PlatoonCarRms
 
         @display("bgb=358,382");
     gates:
-        input rmsIn;
+        input risIn;
     submodules:
 
         helper: <helper_type> like BasePositionHelper {
@@ -68,14 +68,14 @@ module PlatoonCarRms
                 @display("p=165,120");
         }
 
-        veinsRmsDriver: VeinsRmsRadioDriver {
+        veinsRisDriver: VeinsRisRadioDriver {
             parameters:
                 @display("p=165,184");
         }
 
-        nicRms: NicRms {
+        nicRis: NicRis {
             parameters:
-                isRms = false;
+                isRis = false;
                 @display("p=165,337");
         }
         
@@ -101,12 +101,12 @@ module PlatoonCarRms
         veins11pDriver.upperLayerIn <-- prot.radiosOut++;
         veins11pDriver.upperLayerOut --> prot.radiosIn++;
 
-        veinsRmsDriver.upperLayerIn <-- prot.radiosOut++;
-        veinsRmsDriver.upperLayerOut --> prot.radiosIn++;
+        veinsRisDriver.upperLayerIn <-- prot.radiosOut++;
+        veinsRisDriver.upperLayerOut --> prot.radiosIn++;
 
-        nicRms.upperLayerIn <-- veinsRmsDriver.lowerLayerOut;
-        nicRms.upperLayerOut --> veinsRmsDriver.lowerLayerIn;
+        nicRis.upperLayerIn <-- veinsRisDriver.lowerLayerOut;
+        nicRis.upperLayerOut --> veinsRisDriver.lowerLayerIn;
 
-        rmsIn --> nicRms.radioIn;
+        risIn --> nicRis.radioIn;
 
 }

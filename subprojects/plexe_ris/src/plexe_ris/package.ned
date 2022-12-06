@@ -18,4 +18,4 @@
 // along with this program; if not, see <http://www.gnu.org/licenses/>.
 //
 
-package org.car2x.plexe.subprojects.plexe_rms;
+package org.car2x.plexe.subprojects.plexe_ris;

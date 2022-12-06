@@ -33,7 +33,7 @@ protected:
     cOutVector antennaPowerOut;
     cOutVector phiROut, thetaROut, phiIOut, thetaIOut;
 
-    bool useRms = false;
+    bool useRis = false;
 
     virtual void sendPlatooningMessage(int destinationAddress, enum PlexeRadioInterfaces interfaces = PlexeRadioInterfaces::ALL) override;
 

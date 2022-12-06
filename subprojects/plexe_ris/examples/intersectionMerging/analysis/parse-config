@@ -6,7 +6,7 @@ file = map-config
 resdir = ../results
 
 [config]
-config = RMSTesting
+config = RISTesting
 out = GainDistance
 map    = %(defaultMap)s
 mapFile = %(file)s

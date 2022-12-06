@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2012-2022 Michele Segata <segata@ccs-labs.org>
+// Copyright (C) 2020-2022 Michele Segata <segata@ccs-labs.org>
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -18,20 +18,24 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-package org.car2x.plexe.subprojects.plexe_rms;
+#pragma once
 
-import org.car2x.plexe.protocols.IntersectionMergingBeaconing;
+#include "veins/base/modules/BaseApplLayer.h"
+#include "plexe/driver/PlexeRadioDriverInterface.h"
 
-//
-// Define static beaconing for platooning
-//
-simple IntersectionMergingBeaconingLogging extends IntersectionMergingBeaconing
-{
-    parameters:
-    
-    	bool disableBeaconing = default(false);
-    	bool useRms = default(false);
-        @display("i=block/network2");
-        @class(plexe::IntersectionMergingBeaconingLogging);
+namespace plexe {
 
-}
+class VeinsRisRadioDriver : public PlexeRadioDriverInterface, public veins::BaseApplLayer {
+
+public:
+    bool registerNode(int nodeId);
+    virtual int getDeviceType() override
+    {
+        return PlexeRadioInterfaces::VEINS_RIS;
+    }
+
+protected:
+    virtual void handleLowerMsg(cMessage* msg) override;
+    virtual void handleUpperMsg(cMessage* msg) override;
+};
+} // namespace plexe

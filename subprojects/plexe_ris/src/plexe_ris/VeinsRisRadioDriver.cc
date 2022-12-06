@@ -19,10 +19,10 @@
 //
 //
 
-#include "VeinsRmsRadioDriver.h"
+#include "VeinsRisRadioDriver.h"
 #include "veins/modules/messages/BaseFrame1609_4_m.h"
 #include "veins/base/utils/FindModule.h"
-#include "veins-rms/mac/MacLayerRms.h"
+#include "veins-ris/mac/MacLayerRis.h"
 #include "plexe/messages/PlatooningBeacon_m.h"
 
 #define VEH_ID_TO_MAC(x) (x + 1)
@@ -32,26 +32,25 @@ using namespace veins;
 
 namespace plexe {
 
-Define_Module(plexe::VeinsRmsRadioDriver);
+Define_Module(plexe::VeinsRisRadioDriver);
 
-void VeinsRmsRadioDriver::handleLowerMsg(cMessage* msg)
+void VeinsRisRadioDriver::handleLowerMsg(cMessage* msg)
 {
     BaseFrame1609_4* frame = check_and_cast<BaseFrame1609_4*>(msg);
     if (frame->getRecipientAddress() != veins::LAddress::L2BROADCAST()) frame->setRecipientAddress(MAC_TO_VEH_ID(frame->getRecipientAddress()));
     sendUp(frame);
 }
 
-void VeinsRmsRadioDriver::handleUpperMsg(cMessage* msg)
+void VeinsRisRadioDriver::handleUpperMsg(cMessage* msg)
 {
     BaseFrame1609_4* frame = check_and_cast<BaseFrame1609_4*>(msg);
-    PlatooningBeacon* bcn = dynamic_cast<PlatooningBeacon*>(frame->getEncapsulatedPacket());
     if (frame->getRecipientAddress() != veins::LAddress::L2BROADCAST()) frame->setRecipientAddress(VEH_ID_TO_MAC(frame->getRecipientAddress()));
     sendDown(frame);
 }
 
-bool VeinsRmsRadioDriver::registerNode(int nodeId)
+bool VeinsRisRadioDriver::registerNode(int nodeId)
 {
-    if (MacLayerRms* mac = FindModule<MacLayerRms*>::findSubModule(getParentModule())) {
+    if (MacLayerRis* mac = FindModule<MacLayerRis*>::findSubModule(getParentModule())) {
         mac->setMACAddress(VEH_ID_TO_MAC(nodeId));
         return true;
     }

@@ -192,10 +192,10 @@ load('../results/IntersectionMerge.Rdata')
 allData$virtualDistance[allData$virtualDistance < -1e5] <- NA
 # shadowing
 for (s in c(0, 1)) {
-    # rms
+    # ris
     for (r in c(0, 1)) {
         if (s == 0 && r == 1) next
-        d <- subset(allData, time > 3 & shadowing==s & useRms==r)
+        d <- subset(allData, time > 3 & shadowing==s & useRis==r)
         plot.virtual.distance(paste("virtual-distance", s, r, sep="_"), d)
         plot.speed(paste("speed", s, r, sep="_"), d)
         plot.acceleration(paste("acceleration", s, r, sep="_"), d)

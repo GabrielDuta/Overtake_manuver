@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2020-2022 Michele Segata <segata@ccs-labs.org>
+// Copyright (C) 2019 Christoph Sommer <sommer@ccs-labs.org>
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -20,22 +20,24 @@
 
 #pragma once
 
-#include "veins/base/modules/BaseApplLayer.h"
-#include "plexe/driver/PlexeRadioDriverInterface.h"
+#include "plexe/plexe.h"
 
-namespace plexe {
+// Version number of last release ("major.minor.patch") or an alpha version, if nonzero
+#define PLEXE_RIS_VERSION_MAJOR 3
+#define PLEXE_RIS_VERSION_MINOR 1
+#define PLEXE_RIS_VERSION_PATCH 0
+#define PLEXE_RIS_VERSION_ALPHA 0
 
-class VeinsRmsRadioDriver : public PlexeRadioDriverInterface, public veins::BaseApplLayer {
+// Explicitly check Plexe version number
+#if !(PLEXE_VERSION_MAJOR == 3 && PLEXE_VERSION_MINOR >= 0)
+#error Plexe version 3.0 or compatible required
+#endif
 
-public:
-    bool registerNode(int nodeId);
-    virtual int getDeviceType() override
-    {
-        return PlexeRadioInterfaces::VEINS_RMS;
-    }
-
-protected:
-    virtual void handleLowerMsg(cMessage* msg) override;
-    virtual void handleUpperMsg(cMessage* msg) override;
-};
-} // namespace plexe
+// PLEXE_RIS_API macro. Allows us to use the same .h files for both building a .dll and linking against it
+#if defined(PLEXE_RIS_EXPORT)
+#define PLEXE_RIS_API OPP_DLLEXPORT
+#elif defined(PLEXE_RIS_IMPORT)
+#define PLEXE_RIS_API OPP_DLLIMPORT
+#else
+#define PLEXE_RIS_API
+#endif

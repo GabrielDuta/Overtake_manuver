@@ -18,14 +18,14 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-package org.car2x.plexe.subprojects.plexe_rms;
+package org.car2x.plexe.subprojects.plexe_ris;
 
 import org.car2x.veins.base.modules.IBaseApplLayer;
 
-simple VeinsRmsRadioDriver like IBaseApplLayer
+simple VeinsRisRadioDriver like IBaseApplLayer
 {
     parameters:
-        @class(plexe::VeinsRmsRadioDriver);
+        @class(plexe::VeinsRisRadioDriver);
         int headerLength @unit("bit") = default(0bit);
 
     gates:
