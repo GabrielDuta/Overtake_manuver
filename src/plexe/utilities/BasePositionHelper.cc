@@ -41,7 +41,6 @@ Define_Module(BasePositionHelper);
 
 void BasePositionHelper::initialize(int stage)
 {
-
     cSimpleModule::initialize(stage);
 
     if (stage == 0) {

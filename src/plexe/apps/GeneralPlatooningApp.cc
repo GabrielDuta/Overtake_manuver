@@ -39,8 +39,9 @@ Define_Module(GeneralPlatooningApp);
 
 void GeneralPlatooningApp::initialize(int stage)
 {
+    std::cout << "!! App init" << std::endl;
     BaseApp::initialize(stage);
-
+    
     if (stage == 1) {
         // connect maneuver application to protocol
         protocol->registerApplication(MANEUVER_TYPE, gate("lowerLayerIn"), gate("lowerLayerOut"), gate("lowerControlIn"), gate("lowerControlOut"));

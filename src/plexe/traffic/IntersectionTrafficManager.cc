@@ -48,6 +48,7 @@ void IntersectionTrafficManager::initialize(int stage)
         initialPositionDeltaC = par("initialPositionDeltaC");
         routeLeftRight = par("routeLeftRight").stdstringValue();
         routeBottomRight = par("routeBottomRight").stdstringValue();
+        std::cout << "!!!IntersectionTrafficManager 2" << std::endl;
 
         insertPlatoonMessage = new cMessage("");
         scheduleAt(platoonInsertTime, insertPlatoonMessage);
@@ -100,6 +101,7 @@ void IntersectionTrafficManager::insertPlatoons()
         shockwave.vehicleId = 0;
         addVehicleToQueue(routeLeftRight, shockwave);
     }
+
 
     for (int i = 0; i < platoonSizeA; i++) {
         VehicleInfo vehicleInfo;

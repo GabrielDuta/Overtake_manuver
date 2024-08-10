@@ -85,6 +85,7 @@ void IntersectionMergeManeuver::startManeuver(const void* parameters)
 {
     if (initializeIntersectionMergeManeuver(parameters)) {
         // send merge request to follower platoon
+        std::cout << "!!Sending merge request\n";
         sendMergeRequest();
         mergeRequestTimeout = new cMessage("sendRequestTimeout");
         app->scheduleSelfMsg(simTime() + 1, mergeRequestTimeout);
@@ -150,6 +151,7 @@ IntersectionMergeRequest* IntersectionMergeManeuver::createIntersectionMergeRequ
 void IntersectionMergeManeuver::handleIntersectionMergeRequest(const IntersectionMergeRequest* msg)
 {
 
+  std::cout << "!!!!!handleIntersectionMergeRequest\n";
     if (msg->getDestinationId() != positionHelper->getId() || app->isInManeuver())
         return;
 

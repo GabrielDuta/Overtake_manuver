@@ -68,11 +68,9 @@ void IntersectionMergeScenario::prepareManeuverCars()
 
 void IntersectionMergeScenario::handleSelfMsg(cMessage* msg)
 {
-
     // this takes car of feeding data into CACC and reschedule the self message
     ManeuverScenario::handleSelfMsg(msg);
 
-    LOG << "Starting the intersection merge maneuver\n";
     if (msg == startManeuver) app->startIntersectionMergeManeuver(PLATOON_ID_B, positions.getMemberId(PLATOON_ID_B,  0));
 }
 
