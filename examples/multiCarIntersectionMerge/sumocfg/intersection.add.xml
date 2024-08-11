@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2022-08-22 16:22:26 by Eclipse SUMO netedit Version 1.12.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="intersection.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="intersection.net.xml"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
+    </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
+
+    <netedit>
+        <additional-files value="/Users/segata/src/plexe/examples/intersectionMerging/sumocfg/intersection.add.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <poly id="building_left_0" color="red" fill="1" layer="0.00" shape="-485.000000,-5.000000 -405.000000,-5.000000 -405.000000,-280.000000 -485.000000,-280.000000"/>
+    <poly id="building_left_1" color="red" fill="1" layer="0.00" shape="-385.000000,-5.000000 -305.000000,-5.000000 -305.000000,-280.000000 -385.000000,-280.000000"/>
+    <poly id="building_left_2" color="red" fill="1" layer="0.00" shape="-285.000000,-5.000000 -205.000000,-5.000000 -205.000000,-280.000000 -285.000000,-280.000000"/>
+    <poly id="building_left_3" color="red" fill="1" layer="0.00" shape="-185.000000,-5.000000 -105.000000,-5.000000 -105.000000,-280.000000 -185.000000,-280.000000"/>
+    <poly id="building_left_4" color="red" fill="1" layer="0.00" shape="-85.000000,-5.000000 -5.000000,-5.000000 -5.000000,-280.000000 -85.000000,-280.000000"/>
+    <poly id="building_left_5" color="red" fill="1" layer="0.00" shape="-485.000000,-305.000000 -405.000000,-305.000000 -405.000000,-580.000000 -485.000000,-580.000000"/>
+    <poly id="building_left_6" color="red" fill="1" layer="0.00" shape="-385.000000,-305.000000 -305.000000,-305.000000 -305.000000,-580.000000 -385.000000,-580.000000"/>
+    <poly id="building_left_7" color="red" fill="1" layer="0.00" shape="-285.000000,-305.000000 -205.000000,-305.000000 -205.000000,-580.000000 -285.000000,-580.000000"/>
+    <poly id="building_left_8" color="red" fill="1" layer="0.00" shape="-185.000000,-305.000000 -105.000000,-305.000000 -105.000000,-580.000000 -185.000000,-580.000000"/>
+    <poly id="building_left_9" color="red" fill="1" layer="0.00" shape="-85.000000,-305.000000 -5.000000,-305.000000 -5.000000,-580.000000 -85.000000,-580.000000"/>
+    <poly id="building_right_0" color="red" fill="1" layer="0.00" shape="5.000000,-5.000000 85.000000,-5.000000 85.000000,-280.000000 5.000000,-280.000000"/>
+    <poly id="building_right_1" color="red" fill="1" layer="0.00" shape="105.000000,-5.000000 185.000000,-5.000000 185.000000,-280.000000 105.000000,-280.000000"/>
+    <poly id="building_right_2" color="red" fill="1" layer="0.00" shape="205.000000,-5.000000 285.000000,-5.000000 285.000000,-280.000000 205.000000,-280.000000"/>
+    <poly id="building_right_3" color="red" fill="1" layer="0.00" shape="305.000000,-5.000000 385.000000,-5.000000 385.000000,-280.000000 305.000000,-280.000000"/>
+    <poly id="building_right_4" color="red" fill="1" layer="0.00" shape="405.000000,-5.000000 485.000000,-5.000000 485.000000,-280.000000 405.000000,-280.000000"/>
+    <poly id="building_right_5" color="red" fill="1" layer="0.00" shape="5.000000,-305.000000 85.000000,-305.000000 85.000000,-580.000000 5.000000,-580.000000"/>
+    <poly id="building_right_6" color="red" fill="1" layer="0.00" shape="105.000000,-305.000000 185.000000,-305.000000 185.000000,-580.000000 105.000000,-580.000000"/>
+    <poly id="building_right_7" color="red" fill="1" layer="0.00" shape="205.000000,-305.000000 285.000000,-305.000000 285.000000,-580.000000 205.000000,-580.000000"/>
+    <poly id="building_right_8" color="red" fill="1" layer="0.00" shape="305.000000,-305.000000 385.000000,-305.000000 385.000000,-580.000000 305.000000,-580.000000"/>
+    <poly id="building_right_9" color="red" fill="1" layer="0.00" shape="405.000000,-305.000000 485.000000,-305.000000 485.000000,-580.000000 405.000000,-580.000000"/>
+</additional>
