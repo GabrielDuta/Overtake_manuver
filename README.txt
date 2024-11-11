@@ -1,5 +1,5 @@
 This repository contains the Plexe project and in particular an implementation of the Overtake Maneuver.
-Refer to this thesis for more information:
+Refer to the thesis for more information: https://github.com/GabrielDuta/Overtake_manuver/blob/main/main.pdf
 To execute the maneuver go to the ./examples/overtake directory and run the command plexe_run -u Cmdenv -c Overtake -r 0
 
 
