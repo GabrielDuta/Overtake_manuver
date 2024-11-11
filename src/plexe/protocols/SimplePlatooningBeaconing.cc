@@ -26,7 +26,6 @@ Define_Module(SimplePlatooningBeaconing)
 
 void SimplePlatooningBeaconing::initialize(int stage)
 {
-  std::cout << "! SimplePlatooningBeaconing::initialize" << std::endl;
     BaseProtocol::initialize(stage);
 
     if (stage == 0) {

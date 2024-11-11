@@ -38,8 +38,6 @@ const int BaseProtocol::BEACON_TYPE = 12345;
 
 void BaseProtocol::initialize(int stage)
 {
-  std::cout << "! BaseProtocol::initialize" << std::endl;
-
     BaseApplLayer::initialize(stage);
 
     if (stage == 0) {

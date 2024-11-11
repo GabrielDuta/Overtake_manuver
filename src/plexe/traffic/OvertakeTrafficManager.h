@@ -18,8 +18,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-#ifndef OVERTAKETRAFFICMANAGER_H_
-#define OVERTAKETRAFFICMANAGER_H_
+#pragma once
 
 #include "plexe/mobility/TraCIBaseTrafficManager.h"
 
@@ -35,10 +34,12 @@ public:
         insertPlatoonMessage = nullptr;
         platoonInsertDistance = 0;
         platoonInsertHeadway = 0;
-        platoonInsertSpeed = 0;
         platoonInsertTime = SimTime(0);
         platoonLeaderHeadway = 0;
         platoonAdditionalDistance = 0;
+
+        platoonASpeed = 0;
+        platoonBSpeed = 0;
         platoonSizeA = 0;
         platoonSizeB = 0;
         platoonSizeC = 0;
@@ -57,7 +58,6 @@ protected:
     virtual void handleSelfMsg(cMessage* msg);
 
     SimTime platoonInsertTime;
-    double platoonInsertSpeed;
     // vehicles to be inserted
     struct Vehicle automated;
 
@@ -67,6 +67,10 @@ protected:
     int platoonSizeB;
     // vehicles per platoon
     int platoonSizeC;
+
+    double platoonASpeed;
+    double platoonBSpeed;
+    double platoonCSpeed;
 
     int initialPositionDeltaA;
     int initialPositionDeltaB;
@@ -86,5 +90,3 @@ protected:
 };
 
 } // namespace plexe
-
-#endif

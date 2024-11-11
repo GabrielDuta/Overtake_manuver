@@ -30,6 +30,7 @@
 #include "plexe/maneuver/JoinAtBack.h"
 #include "plexe/maneuver/MergeAtBack.h"
 #include "plexe/maneuver/IntersectionMergeManeuver.h"
+#include "plexe/maneuver/OvertakeManeuver.h"
 
 #include "plexe/messages/ManeuverMessage_m.h"
 #include "plexe/messages/UpdatePlatoonData_m.h"
@@ -63,6 +64,7 @@ enum class PlatoonRole : size_t {
  * @see JoinManeuver
  * @see JoinAtBack
  * @see ManeuverMessage
+ * @see OvertakeManeuver
  */
 class GeneralPlatooningApp : public BaseApp {
 
@@ -76,6 +78,7 @@ public:
         , joinManeuver(nullptr)
         , mergeManeuver(nullptr)
         , intersectionMergeManeuver(nullptr)
+        , overtakeManeuver(nullptr)
     {
     }
 
@@ -131,6 +134,12 @@ public:
      * @param int leaderId of the leader of such platoon
      */
     void startIntersectionMergeManeuver(int platoonId, int leaderId);
+
+    /**
+     * Request start of the OvertakeManeuver
+     */
+    //void startOvertakeManeuver(int platoonId, int leaderId);
+    void startOvertakeManeuver();
 
     /** Abort join maneuver */
     void abortJoinManeuver();
@@ -320,6 +329,8 @@ private:
     JoinManeuver* mergeManeuver;
     /** intersection merge maneuver implementation */
     IntersectionMergeManeuver* intersectionMergeManeuver;
+    /** overtake maneuver implementation */
+    OvertakeManeuver* overtakeManeuver;
 };
 
 } // namespace plexe

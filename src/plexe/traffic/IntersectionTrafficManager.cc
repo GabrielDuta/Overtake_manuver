@@ -48,7 +48,6 @@ void IntersectionTrafficManager::initialize(int stage)
         initialPositionDeltaC = par("initialPositionDeltaC");
         routeLeftRight = par("routeLeftRight").stdstringValue();
         routeBottomRight = par("routeBottomRight").stdstringValue();
-        std::cout << "!!!IntersectionTrafficManager 2" << std::endl;
 
         insertPlatoonMessage = new cMessage("");
         scheduleAt(platoonInsertTime, insertPlatoonMessage);

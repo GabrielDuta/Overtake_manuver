@@ -18,35 +18,50 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-#ifndef OVERTAKESCENARIO_H_
-#define OVERTAKESCENARIO_H_
+#pragma once
 
 #include "plexe/scenarios/BaseScenario.h"
-#include "plexe/apps/BaseApp.h"
+#include "plexe/apps/OvertakeApp.h"
+#include "plexe/messages/ManeuverMessage_m.h"
+#include "plexe/utilities/DynamicPositionManager.h"
+#include "plexe/maneuver/OvertakeManeuver.h"
 
 namespace plexe {
 
-class OvertakeScenario : public BaseScenario {
+class OvertakeScenario : public BaseScenario{
 
 public:
-    virtual void initialize(int stage);
+
+    virtual void initialize(int stage) override;
+    virtual void handleSelfMsg(cMessage* msg) override;
+
+    static const int MANEUVER_TYPE = 12347;
+    enum ACTIVE_CONTROLLER getTargetController () const;
+
+//    OvertakeScenario()
+//        :positions(DynamicPositionManager::getInstance())
 
 protected:
-    // leader average speed
-    double leaderSpeed;
-    // application layer, used to stop the simulation
-    BaseApp* appl;
-    // sumo vehicle type of plaotoning cars
-    std::string platooningVType;
 
+    void prepareManeuverCars();
+    void setupFormation();
+
+    // used to retrieve the initial formation setup
+    //DynamicPositionManager& positions;
+
+    // message used to start the maneuver
+    cMessage* startManeuver;
+    // pointer to protocol
+    OvertakeApp* app;
 public:
     OvertakeScenario()
     {
-        leaderSpeed = 0;
-        appl = 0;
+        startManeuver = nullptr;
+        app = nullptr;
     }
+    virtual ~OvertakeScenario();
+
+    enum ACTIVE_CONTROLLER targetController;
 };
 
 } // namespace plexe
-
-#endif

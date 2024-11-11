@@ -37,9 +37,11 @@ void OvertakeTrafficManager::initialize(int stage)
         initialPositionDeltaA = par("initialPositionDeltaA");
         initialPositionDeltaB = par("initialPositionDeltaB");
         initialPositionDeltaC = par("initialPositionDeltaC");
+        platoonASpeed = par("platoonASpeed").doubleValue();
+        platoonBSpeed = par("platoonBSpeed").doubleValue();
+        platoonCSpeed = par("platoonCSpeed").doubleValue();
 
         platoonInsertTime = SimTime(par("platoonInsertTime").doubleValue());
-        platoonInsertSpeed = par("platoonInsertSpeed").doubleValue();
         platoonInsertDistance = par("platoonInsertDistance").doubleValue();
         platoonInsertHeadway = par("platoonInsertHeadway").doubleValue();
         platoonLeaderHeadway = par("platoonLeaderHeadway").doubleValue();
@@ -55,7 +57,7 @@ void OvertakeTrafficManager::scenarioLoaded()
     automated.id = findVehicleTypeIndex(platooningVType);
     automated.lane = -1;
     automated.position = 0;
-    automated.speed = platoonInsertSpeed / 3.6;
+    automated.speed = platoonASpeed / 3.6;
 }
 
 void OvertakeTrafficManager::handleSelfMsg(cMessage* msg)
@@ -71,13 +73,13 @@ void OvertakeTrafficManager::handleSelfMsg(cMessage* msg)
 void OvertakeTrafficManager::insertPlatoons()
 {
     // compute intervehicle distance
-    double distance = platoonInsertSpeed / 3.6 * platoonInsertHeadway + platoonInsertDistance;
+    double distance = platoonASpeed / 3.6 * platoonInsertHeadway + platoonInsertDistance;
     // length of 1 platoon
     double platoonLengthA = platoonSizeA * 4 + (platoonSizeA - 1) * distance;
     double platoonLengthB = platoonSizeB * 4 + (platoonSizeB - 1) * distance;
     double platoonLengthC = platoonSizeC * 4 + (platoonSizeC - 1) * distance;
     // inter-platoon distance
-    double platoonDistance = platoonInsertSpeed / 3.6 * platoonLeaderHeadway + platoonAdditionalDistance;
+    double platoonDistance = platoonASpeed / 3.6 * platoonLeaderHeadway + platoonAdditionalDistance;
     int currentVehicleId = 0;
     int basePlatoonId = 0;
 
@@ -96,7 +98,7 @@ void OvertakeTrafficManager::insertPlatoons()
         automated.position = currentRoadPosition - i * (distance + 4);
         automated.lane = 0;
         automated.vehicleId = currentVehicleId;
-        addVehicleToQueue("lane0", automated);
+        addVehicleToQueue(0, automated);
         positions.addVehicleToPlatoon(currentVehicleId, vehicleInfo);
         currentVehicleId++;
         if (i == 0) {
@@ -114,14 +116,15 @@ void OvertakeTrafficManager::insertPlatoons()
         vehicleInfo.controller = i == 0 ? ACC : controller;
         vehicleInfo.id = currentVehicleId;
         vehicleInfo.position = i;
-        vehicleInfo.platoonId = 0;
+        vehicleInfo.platoonId = 1;
         vehicleInfo.distance = i == 0 ? 2 : platoonInsertDistance;
         vehicleInfo.headway = i == 0 ? 0 : platoonInsertHeadway;
 
+        automated.speed = platoonBSpeed / 3.6;
         automated.position = currentRoadPosition - i * (distance + 4);
         automated.lane = 0;
         automated.vehicleId = currentVehicleId;
-        addVehicleToQueue("lane1", automated);
+        addVehicleToQueue(0, automated);
         positions.addVehicleToPlatoon(currentVehicleId, vehicleInfo);
         currentVehicleId++;
         if (i == 0) {
@@ -139,14 +142,15 @@ void OvertakeTrafficManager::insertPlatoons()
         vehicleInfo.controller = i == 0 ? ACC : controller;
         vehicleInfo.id = currentVehicleId;
         vehicleInfo.position = i;
-        vehicleInfo.platoonId = 0;
+        vehicleInfo.platoonId = 2;
         vehicleInfo.distance = i == 0 ? 2 : platoonInsertDistance;
         vehicleInfo.headway = i == 0 ? 0 : platoonInsertHeadway;
 
+        automated.speed = platoonCSpeed / 3.6;
         automated.position = currentRoadPosition - i * (distance + 4);
-        automated.lane = 1;
+        automated.lane = 0;
         automated.vehicleId = currentVehicleId;
-        addVehicleToQueue(0, automated);
+        addVehicleToQueue("lane1", automated);
         positions.addVehicleToPlatoon(currentVehicleId, vehicleInfo);
         currentVehicleId++;
         if (i == 0) {
@@ -157,7 +161,6 @@ void OvertakeTrafficManager::insertPlatoons()
         }
     }
 
-  std::cout << "! Platoons inserted" << std::endl;
 }
 
 OvertakeTrafficManager::~OvertakeTrafficManager()

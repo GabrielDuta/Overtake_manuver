@@ -20,8 +20,6 @@
 
 #include "plexe/scenarios/OvertakeScenario.h"
 
-using namespace veins;
-
 namespace plexe {
 
 Define_Module(OvertakeScenario);
@@ -29,38 +27,64 @@ Define_Module(OvertakeScenario);
 void OvertakeScenario::initialize(int stage)
 {
 
-        std::cout << "!!!!!!!!   " << plexeTraciVehicle->getLanesCount()  << std::endl;
     BaseScenario::initialize(stage);
 
-    if (stage == 0)
-        // get pointer to application
-        appl = FindModule<BaseApp*>::findSubModule(getParentModule());
-
     if (stage == 2) {
-
-        /*
-        platooningVType = par("platooningVType").stdstringValue();
-
-        plexeTraciVehicle->setFixedLane(traciVehicle->getLaneIndex(), false);
-        traciVehicle->setSpeedMode(0);
-        if (positionHelper->isLeader()) {
-            for (int i = 1; i < positionHelper->getPlatoonSize(); i++) {
-                std::stringstream ss;
-                ss << platooningVType << "." << positionHelper->getMemberId(i);
-                plexeTraciVehicle->addPlatoonMember(ss.str(), i);
-            }
-            plexeTraciVehicle->enableAutoLaneChanging(true);
-            plexeTraciVehicle->setCruiseControlDesiredSpeed(mobility->getSpeed());
-        }
-        else {
-            std::stringstream ssl, ss;
-            ssl << platooningVType << "." << positionHelper->getLeaderId();
-            ss << platooningVType << "." << positionHelper->getFrontId();
-            plexeTraciVehicle->enableAutoFeed(true, ssl.str(), ss.str());
-            plexeTraciVehicle->setCruiseControlDesiredSpeed(mobility->getSpeed() + 10);
-        }
-        */
+        app = veins::FindModule<OvertakeApp*>::findSubModule(getParentModule());
+        prepareManeuverCars();
     }
+}
+
+void OvertakeScenario::prepareManeuverCars()
+{
+    if (positionHelper->isLeader() && positionHelper->getPlatoonId() == PLATOON_ID_A) {
+        plexeTraciVehicle->setCruiseControlDesiredSpeed(positionHelper->getPlatoonSpeed());
+        plexeTraciVehicle->setActiveController(positionHelper->getController());
+        plexeTraciVehicle->setFixedLane(0);
+        app->setPlatoonRole(PlatoonRole::LEADER);
+    }
+    else if (positionHelper->isLeader() && positionHelper->getPlatoonId() == PLATOON_ID_B) {
+        plexeTraciVehicle->setCruiseControlDesiredSpeed(positionHelper->getPlatoonSpeed());
+        plexeTraciVehicle->setActiveController(positionHelper->getController());
+        plexeTraciVehicle->setFixedLane(0);
+        app->setPlatoonRole(PlatoonRole::LEADER);
+        startManeuver = new cMessage();
+        scheduleAt(simTime() + SimTime(1), startManeuver);
+    }
+    else if (positionHelper->isLeader() && positionHelper->getPlatoonId() == PLATOON_ID_C) {
+        plexeTraciVehicle->setCruiseControlDesiredSpeed(positionHelper->getPlatoonSpeed());
+        plexeTraciVehicle->setActiveController(positionHelper->getController());
+        plexeTraciVehicle->setFixedLane(0);
+        app->setPlatoonRole(PlatoonRole::LEADER);
+    }
+    else {
+        // these are the followers which are already in the platoon
+        plexeTraciVehicle->setCruiseControlDesiredSpeed(130.0 / 3.6);
+        plexeTraciVehicle->setActiveController(positionHelper->getController());
+        plexeTraciVehicle->setFixedLane(0);
+        app->setPlatoonRole(PlatoonRole::FOLLOWER);
+    }
+}
+
+void OvertakeScenario::handleSelfMsg(cMessage* msg)
+{
+    // this takes car of feeding data into CACC and reschedule the self message
+    BaseScenario::handleSelfMsg(msg);
+
+    if (msg == startManeuver) {
+        app->startOvertakeManeuver();
+    }
+}
+
+enum ACTIVE_CONTROLLER OvertakeScenario::getTargetController() const
+{
+    return targetController;
+}
+
+OvertakeScenario::~OvertakeScenario()
+{
+    cancelAndDelete(startManeuver);
+    startManeuver = nullptr;
 }
 
 } // namespace plexe

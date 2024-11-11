@@ -39,7 +39,6 @@ Define_Module(GeneralPlatooningApp);
 
 void GeneralPlatooningApp::initialize(int stage)
 {
-    std::cout << "!! App init" << std::endl;
     BaseApp::initialize(stage);
     
     if (stage == 1) {
@@ -289,6 +288,45 @@ UpdatePlatoonFormation* GeneralPlatooningApp::createUpdatePlatoonFormation(int v
     }
     return msg;
 }
+
+void GeneralPlatooningApp::startOvertakeManeuver()
+{
+    ASSERT(getPlatoonRole() == PlatoonRole::LEADER);
+    ASSERT(!inManeuver);
+}
+
+/*
+void GeneralPlatooningApp::sendOvertakeRequest(int platoonId, int leaderId)
+{
+    Enter_Method_Silent();
+
+    OvertakeRequest* msg = new OvertakeRequest("OvertakeRequest");
+    fillManeuverMessage(msg, positionHelper->getId(), positionHelper->getExternalId(), positionHelper->getPlatoonId(), leaderId);
+    msg->setTargetPlatoonId(platoonId);
+
+    // Send unicast message to the leader of the platoon to be overtaken
+    BaseFrame1609_4* frame = new BaseFrame1609_4("OvertakeRequest", msg->getKind());
+    frame->setRecipientAddress(leaderId);
+    frame->setChannelNumber(static_cast<int>(Channel::cch));
+    frame->encapsulate(msg);
+
+    sendDown(frame);
+}
+
+void GeneralPlatooningApp::onOvertakeRequest(OvertakeRequest* msg)
+{
+    Enter_Method_Silent();
+
+    // Process the overtake request
+    // This could involve checking if overtaking is safe, responding to the requester, etc.
+    // For now, we'll just print a message
+    EV_INFO << "Received overtake request from vehicle " << msg->getVehicleId() << endl;
+
+    // TODO: Implement the logic to handle the overtake request
+    // This might involve checking traffic conditions, responding to the requester, etc.
+}
+*/
+
 
 void GeneralPlatooningApp::receiveSignal(cComponent* src, simsignal_t id, cObject* value, cObject* details)
 {

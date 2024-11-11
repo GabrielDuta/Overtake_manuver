@@ -1,0 +1,9 @@
+<edges>
+    <edge id="E0" from="J0" to="J1" numLanes="1" speed="100.000000">
+        <neigh lane="E1_0"/>
+    </edge>
+    <edge id="E1" from="J1" to="J0" numLanes="1" speed="100.000000">
+        <neigh lane="E0_0"/>
+    </edge>
+</edges>
+

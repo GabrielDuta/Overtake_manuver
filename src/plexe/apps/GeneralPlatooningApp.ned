@@ -33,7 +33,9 @@ parameters:
     string mergeManeuver;
     // implementation of the intersection merge maneuver
     string intersectionMergeManeuver;
-
+    // implementation of the overtake maneuver
+    string overtakeManeuver;
+    
     int headerLength @unit("bit") = default(0 bit);
     @display("i=block/app2");
     @class(plexe::GeneralPlatooningApp);

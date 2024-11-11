@@ -32,8 +32,9 @@
 <routes>
     <vType id="vtypeauto" accel="2.5" decel="9.0" sigma="0.5" length="4" minGap="0" maxSpeed="1000" color="1,0,0" probability="1" tau="3.0" speedFactor="2"
         carFollowModel="CC" tauEngine="0.5" omegaN="0.2" xi="1" c1="0.5" lanesCount="4" ccAccel="1.5" ploegKp="0.2" ploegKd="0.7" ploegH="0.5"
-        laneChangeModel="LC2013" lcStrategic="5" lcCooperative="5" lcSpeedGain="5" lcKeepRight="5" />
+        laneChangeModel="LC2013" lcStrategic="5" lcCooperative="5" lcSpeedGain="5" lcKeepRight="5" emissionClass="HBEFA3/PC_D_EU6"/>
     <route id="lane0" edges="E0"/>
     <route id="lane1" edges="E1"/>
-    <!--<flow id="platoon" route="platoon_route" type="vtypeauto" begin="0" period="1" departLane="0" number="8" departSpeed="27.77"/>-->
+    <!--<flow id="platoon" route="lane0" type="vtypeauto" begin="0" period="1" departLane="0" number="1" departSpeed="27.77"/>-->
+
 </routes>

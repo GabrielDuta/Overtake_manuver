@@ -27,8 +27,11 @@ simple OvertakeTrafficManager extends BTraCIBaseTrafficManager {
     parameters:
         //platoon insertion time
         double platoonInsertTime @unit("s");
+        
         //platoon insertion speed
-        double platoonInsertSpeed @unit("kmph");
+        double platoonASpeed @unit("kmph");
+        double platoonBSpeed @unit("kmph");
+        double platoonCSpeed @unit("kmph");
 
         //platoon size A -> overtake
         int platoonSizeA;

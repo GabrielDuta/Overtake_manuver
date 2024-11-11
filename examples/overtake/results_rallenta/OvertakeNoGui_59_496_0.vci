@@ -1,0 +1,266 @@
+file 3126569 1730711201                                         
+version 3
+run OvertakeNoGui-307-20241104-10:06:39-92776
+attr configname OvertakeNoGui
+attr datetime 20241104-10:06:39
+attr datetimef 20241104-100639
+attr experiment OvertakeNoGui
+attr inifile omnetpp.ini
+attr iterationvars "$leaderHeadway=1.2, $leaderSpeed=50, $controller=0, $pCSpeed=59, $pDeltaC=496"
+attr iterationvarsd leaderHeadway=1.2/leaderSpeed=50/controller=0/pCSpeed=59/pDeltaC=496
+attr iterationvarsf leaderHeadway=1.2,leaderSpeed=50,controller=0,pCSpeed=59,pDeltaC=496-
+attr measurement "$leaderHeadway=1.2, $leaderSpeed=50, $controller=0, $pCSpeed=59, $pDeltaC=496"
+attr network Overtake
+attr processid 92776
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 307
+attr seedset 0
+itervar controller 0
+itervar leaderHeadway 1.2
+itervar leaderSpeed 50
+itervar pCSpeed 59
+itervar pDeltaC 496
+config image-path ../../../../veins/images;../../images
+config *.manager.command "\"sumo\""
+config *.manager.ignoreGuiCommands true
+config *.node[*].scenario_type "\"OvertakeScenario\""
+config output-vector-file results/OvertakeNoGui_59_496_0.vec
+config output-scalar-file results/OvertakeNoGui_59_496_0.sca
+config cmdenv-express-mode false
+config cmdenv-autoflush true
+config cmdenv-status-frequency 10s
+config num-rngs 6
+config cmdenv-output-file log.txt
+config cmdenv-redirect-output true
+config network Overtake
+config debug-on-errors true
+config print-undisposed true
+config *.playgroundSizeX 65000m
+config *.playgroundSizeY 25000m
+config *.playgroundSizeZ 50m
+config sim-time-limit "360 s"
+config *.annotations.draw false
+config *.obstacles.debug false
+config *.world.useTorus false
+config *.world.use2D false
+config *.manager.updateInterval 0.01s
+config *.manager.host "\"localhost\""
+config *.manager.moduleType "\"vtypeauto=org.car2x.plexe.PlatoonCar vtypehuman=0\""
+config *.manager.moduleName "\"vtypeauto=node vtypehuman=0\""
+config *.manager.moduleDisplayString "\"\""
+config *.manager.autoShutdown true
+config *.manager.margin 25
+config *.manager.order -1
+config *.connectionManager.sendDirect true
+config *.connectionManager.maxInterfDist 2600m
+config *.connectionManager.drawMaxIntfDist false
+config *.**.nic.mac1609_4.useServiceChannel false
+config *.**.nic.mac1609_4.txPower 100mW
+config *.**.nic.mac1609_4.bitrate 6Mbps
+config *.**.nic.mac1609_4.useAcks true
+config *.**.nic.mac1609_4.ackErrorRate 0.0
+config *.**.nic.mac1609_4.frameErrorRate 0.0
+config *.**.nic.phy80211p.minPowerLevel -94dBm
+config *.**.nic.phy80211p.maxTXPower 100mW
+config *.**.nic.phy80211p.useNoiseFloor true
+config *.**.nic.phy80211p.noiseFloor -95dBm
+config *.**.nic.phy80211p.decider "xmldoc(\"config.xml\")"
+config *.**.nic.phy80211p.analogueModels "xmldoc(\"config.xml\")"
+config *.**.nic.phy80211p.usePropagationDelay true
+config *.node[*].mobility.x 0
+config *.node[*].mobility.y 0
+config *.node[*].mobility.z 1.895
+config *.shockwave[*].mobility.x 0
+config *.shockwave[*].mobility.y 0
+config *.shockwave[*].mobility.z 1.895
+config seed-set 0
+config **.seed 0
+config *.node[*].prot.rng-0 2
+config *.node[*].appl.rng-0 3
+config *.node[*].scenario.rng-0 4
+config *.manager.configFile "\"./sumocfg/overtake.sumo.cfg\""
+config *.manager.launchConfig "xmldoc(\"./sumocfg/overtake.launchd.xml\")"
+config *.node[*].helper_type "\"PositionHelper\""
+config *.node[*].scenario.caccC1 0.5
+config *.node[*].scenario.caccXi 1
+config *.node[*].scenario.caccOmegaN "0.2 Hz"
+config *.node[*].scenario.caccSpacing "5 m"
+config *.node[*].scenario.engineTau "0.5 s"
+config *.node[*].scenario.ploegH "0.5 s"
+config *.node[*].scenario.ploegKp 0.2
+config *.node[*].scenario.ploegKd 0.7
+config *.node[*].scenario.useRealisticEngine false
+config *.node[*].scenario.targetController "\"CACC\""
+config *.node[*].scenario.accHeadway "0.1 s"
+config *.node[*].scenario.leaderHeadway "1.2 s"
+config *.node[*].scenario.leaderSpeed "50 kmph"
+config *.node[*].appl_type "\"OvertakeApp\""
+config *.node[*].appl.*.scalar-recording true
+config *.node[*].appl.*.vector-recording true
+config *.node[*].appl.overtakeManeuver "\"OvertakeManeuver\""
+config *.node[*].protocol_type "\"SimplePlatooningBeaconing\""
+config *.node[*].prot.*.scalar-recording true
+config *.node[*].prot.*.vector-recording true
+config *.node[*].prot.beaconingInterval "0.1 s"
+config *.node[*].prot.priority 4
+config *.node[*].prot.packetSize 200
+config *.node[*].prot.useControllerAcceleration true
+config **.traffic_type "\"OvertakeTrafficManager\""
+config **.traffic.platoonInsertTime "0.1 s"
+config **.traffic.platooningVType "\"vtypeauto\""
+config **.numericController 0
+config **.traffic.platoonInsertDistance 5m
+config **.traffic.platoonInsertHeadway 0s
+config **.traffic.platoonLeaderHeadway 1.2s
+config **.traffic.platoonASpeed 50kmph
+config **.traffic.platoonBSpeed 100kmph
+config **.traffic.platoonCSpeed 59kmph
+config **.traffic.platoonSizeA 2
+config **.traffic.platoonSizeB 1
+config **.traffic.platoonSizeC 1
+config **.traffic.initialPositionDeltaA 150
+config **.traffic.initialPositionDeltaB 50
+config **.traffic.initialPositionDeltaC 496
+config **.traffic.controller "\"CACC\""
+config **.scalar-recording true
+config **.vector-recording true
+
+vector 0 Overtake.node[0].mobility posx ETV
+vector 1 Overtake.node[0].mobility posy ETV
+vector 2 Overtake.node[1].mobility posx ETV
+vector 3 Overtake.node[1].mobility posy ETV
+vector 4 Overtake.node[2].mobility posx ETV
+vector 5 Overtake.node[2].mobility posy ETV
+vector 6 Overtake.node[3].mobility posx ETV
+vector 7 Overtake.node[3].mobility posy ETV
+vector 8 Overtake.node[0].mobility speed ETV
+vector 9 Overtake.node[1].mobility speed ETV
+vector 10 Overtake.node[2].mobility speed ETV
+vector 11 Overtake.node[3].mobility speed ETV
+vector 12 Overtake.node[0].mobility acceleration ETV
+vector 13 Overtake.node[0].mobility co2emission ETV
+vector 14 Overtake.node[1].mobility acceleration ETV
+vector 15 Overtake.node[1].mobility co2emission ETV
+vector 16 Overtake.node[2].mobility acceleration ETV
+vector 17 Overtake.node[2].mobility co2emission ETV
+vector 18 Overtake.node[3].mobility acceleration ETV
+vector 19 Overtake.node[3].mobility co2emission ETV
+vector 20 Overtake.node[0].appl distance ETV
+vector 21 Overtake.node[0].appl relativeSpeed ETV
+vector 22 Overtake.node[0].appl nodeId ETV
+vector 23 Overtake.node[0].appl acceleration ETV
+vector 24 Overtake.node[0].appl controllerAcceleration ETV
+vector 25 Overtake.node[0].appl speed ETV
+vector 26 Overtake.node[0].appl posx ETV
+vector 27 Overtake.node[0].appl posy ETV
+vector 28 Overtake.node[1].appl distance ETV
+vector 29 Overtake.node[1].appl relativeSpeed ETV
+vector 30 Overtake.node[1].appl nodeId ETV
+vector 31 Overtake.node[1].appl acceleration ETV
+vector 32 Overtake.node[1].appl controllerAcceleration ETV
+vector 33 Overtake.node[1].appl speed ETV
+vector 34 Overtake.node[1].appl posx ETV
+vector 35 Overtake.node[1].appl posy ETV
+vector 36 Overtake.node[2].appl distance ETV
+vector 37 Overtake.node[2].appl relativeSpeed ETV
+vector 38 Overtake.node[2].appl nodeId ETV
+vector 39 Overtake.node[2].appl acceleration ETV
+vector 40 Overtake.node[2].appl controllerAcceleration ETV
+vector 41 Overtake.node[2].appl speed ETV
+vector 42 Overtake.node[2].appl posx ETV
+vector 43 Overtake.node[2].appl posy ETV
+vector 44 Overtake.node[3].appl distance ETV
+vector 45 Overtake.node[3].appl relativeSpeed ETV
+vector 46 Overtake.node[3].appl nodeId ETV
+vector 47 Overtake.node[3].appl acceleration ETV
+vector 48 Overtake.node[3].appl controllerAcceleration ETV
+vector 49 Overtake.node[3].appl speed ETV
+vector 50 Overtake.node[3].appl posx ETV
+vector 51 Overtake.node[3].appl posy ETV
+vector 52 Overtake.node[1].prot leaderDelay ETV
+vector 53 Overtake.node[1].prot leaderDelayId ETV
+vector 54 Overtake.node[1].prot frontDelay ETV
+vector 55 Overtake.node[1].prot frontDelayId ETV
+vector 56 Overtake.node[0].prot nodeId ETV
+vector 57 Overtake.node[0].prot busyTime ETV
+vector 58 Overtake.node[0].prot collisions ETV
+vector 59 Overtake.node[1].prot nodeId ETV
+vector 60 Overtake.node[1].prot busyTime ETV
+vector 61 Overtake.node[1].prot collisions ETV
+vector 62 Overtake.node[2].prot nodeId ETV
+vector 63 Overtake.node[2].prot busyTime ETV
+vector 64 Overtake.node[2].prot collisions ETV
+vector 65 Overtake.node[3].prot nodeId ETV
+vector 66 Overtake.node[3].prot busyTime ETV
+vector 67 Overtake.node[3].prot collisions ETV
+48	8286 8214 26 49003 0.21 30.81 307 -0.00109259 4.89399e-05 -0.010614828990297 8.6815283230324e-06
+47	16500 8312 26 49003 0.21 30.81 307 -0.000707784 3.14892e-05 -0.010991577396255 6.0508064149708e-06
+51	24812 5668 26 49003 0.21 30.81 307 1.6 1.6 491.2 785.91999999999
+50	30480 6868 26 49003 0.21 30.81 307 1.02356 502.525 77294.54121 25937067.176632
+49	37348 6889 26 49003 0.21 30.81 307 16.3889 16.39 5031.4035 82459.352385409
+45	44237 5054 26 49003 0.21 30.81 307 0 0 0 0
+44	49291 5361 26 49003 0.21 30.81 307 -1 -1 -307 307
+46	54652 5054 26 49003 0.21 30.81 307 3 3 921 2763
+67	59706 405 1191 47764 1 30 30 0 0 0 0
+66	60111 673 1191 47764 1 30 30 0.009679 0.013147477446 0.378908610454 0.0047968608231192
+65	60784 405 1191 47764 1 30 30 3 3 90 270
+19	61189 92856 15 49076 0.13 30.85 3073 2.3045418593678 2.3073725606701 7089.763555466 16356.898737586
+18	154045 107370 15 49076 0.13 30.85 3073 -0.00070778358498558 3.1545918588449e-05 -0.10997843223279 6.0502529981347e-05
+11	261415 92505 14 49076 0.12 30.85 3074 16.388850972112 16.389999784314 50379.587499999 825667.8064198
+7	353920 56379 13 49076 0.11 30.85 3075 23.4 23.4 71955.000000001 1683747.0000001
+6	410299 89315 13 49076 0.11 30.85 3075 25.204119500009 529 852087.20538749 301195615.26685
+40	499614 9999 25 58706 0.21 41.41 413 -7.31626 1.5 2.6020863946896 690.88176269949
+39	509613 10225 25 58706 0.21 41.41 413 -5.17662 1.5 0.03682701613413 560.02546230953
+43	519838 7978 25 58706 0.21 41.41 413 -1.6 1.6 -286.4 1057.28
+42	527816 9288 25 58706 0.21 41.41 413 52.4982 998.037 196790.6431 124606588.9824
+41	537104 9307 25 58706 0.21 41.41 413 15.3595 27.8817 9483.149 228553.26142776
+37	546411 8621 25 58706 0.21 41.41 413 -13.8289 1.02941 -1260.018280789 9932.6218532285
+36	555032 8521 25 58706 0.21 41.41 413 -1 468.895 33585.3522 8541459.9189699
+38	563553 6856 25 58706 0.21 41.41 413 2 2 826 1652
+64	570409 559 1190 58338 1 41 41 0 0 0 0
+63	570968 896 1190 58338 1 41 41 0.00937 0.013213678806 0.485542978105 0.0058428678833599
+62	571864 559 1190 58338 1 41 41 2 2 82 164
+17	572423 122021 15 58790 0.13 41.46 4134 -0.17103717331235 13.580101908721 19218.179674447 138244.8195885
+16	694444 135373 15 58790 0.13 41.46 4134 -5.1766197955168 1.4999996882949 -0.077457993556976 5600.0225392719
+10	829817 125571 14 58790 0.12 41.46 4135 15.359110312369 27.881705701224 94970.386640111 2289391.1364821
+5	955388 76410 13 58790 0.11 41.46 4136 23.4 26.6 106286.40000001 2739908.1600002
+4	1031798 121432 13 58790 0.11 41.46 4136 75 1024.7038774011 2073033.1024129 1348645107.3949
+24	1153230 16450 23 68339 0.21 61.31 612 -0.00109259 4.89399e-05 -0.010614827319073 8.6815283230333e-06
+23	1169680 12859 23 68339 0.21 61.31 612 -0.000707784 3.14892e-05 -0.010991577250266 6.050806417592e-06
+27	1182539 12075 23 68339 0.21 61.31 612 -1.6 -1.6 -979.20000000001 1566.72
+26	1194614 13854 23 68339 0.21 61.31 612 151.25 999.863 352240.874 239582159.27985
+25	1208468 13904 23 68339 0.21 61.31 612 13.8889 13.89 8500.018 118056.05556446
+21	1222372 11174 23 68339 0.21 61.31 612 0 13.9186 2194.5025 30480.01049215
+20	1233546 11626 23 68339 0.21 61.31 612 -1 270.563 25068.7265 4757307.76754
+22	1245172 10239 23 68339 0.21 61.31 612 0 0 0 0
+58	1255411 839 1188 68192 1 61 61 0 0 0 0
+57	1256250 1293 1188 68192 1 61 61 0.00625 0.013146491828 0.611497477001 0.0066302537463869
+56	1257543 839 1188 68192 1 61 61 0 0 0 0
+13	1258382 168842 15 68338 0.13 61.3 6118 2.0252030031929 2.027603553648 12403.894739926 25148.187069967
+12	1427224 147713 15 68338 0.13 61.3 6118 -0.00070778358534085 3.1545918588449e-05 -0.10997843180807 6.0502530010735e-05
+8	1574937 180733 14 68338 0.12 61.3 6119 13.888850972111 13.889999784314 84986.287999982 1180367.5679938
+1	1755670 113867 13 68338 0.11 61.3 6120 26.6 26.6 162792.00000002 4330267.2000002
+0	1869537 179359 13 68338 0.11 61.3 6120 175 1024.8628854998 3671583.7243496 2571176123.5693
+32	2048896 16478 24 68466 0.21 61.91 618 -0.00108886 2.5 14.988999744342 37.500008950514
+31	2065374 16511 24 68466 0.21 61.91 618 -0.000699199 1.72281 6.8937948615141 9.1620568959352
+35	2081885 12195 24 68466 0.21 61.91 618 -1.6 -1.6 -988.80000000001 1582.08
+34	2094080 13992 24 68466 0.21 61.91 618 142.25 999.329 352707.519 239240796.17078
+33	2108072 14040 24 68466 0.21 61.91 618 13.8889 14.5025 8585.0005 119259.98180877
+29	2122112 16449 24 68466 0.21 61.91 618 -0.000101005 1.69298e-05 -7.9387209999778e-07 1.6101152534799e-07
+28	2138561 12340 24 68466 0.21 61.91 618 -1 5 3053.97146 15305.714604123
+30	2150901 10341 24 68466 0.21 61.91 618 1 1 618 618
+54	2161242 24154 270 68332 0.354478336527 61.254478083039 610 0.099987269734 0.100012757387 61.000000724078 6.1000001588904
+52	2185396 24154 270 68332 0.354478336527 61.254478083039 610 0.099987269734 0.100012757387 61.000000724078 6.1000001588904
+55	2209550 16263 270 68332 0.354478336527 61.254478083039 610 1 1 610 610
+53	2225813 16263 270 68332 0.354478336527 61.254478083039 610 1 1 610 610
+61	2242076 839 1189 68193 1 61 61 0 0 0 0
+60	2242915 1249 1189 68193 1 61 61 0.00625 0.012986431788 0.610296551659 0.0065990016283774
+59	2244164 839 1189 68193 1 61 61 1 1 61 61
+15	2245003 188471 15 68479 0.13 61.93 6181 2.0252285363587 8.2974434266013 12761.669855952 27387.425263757
+14	2433474 213565 15 68479 0.13 61.93 6181 -0.0007001817287744 1.7676320015207 66.508398898354 87.018720398056
+9	2647039 182227 14 68479 0.12 61.93 6182 13.888862279435 14.555083988984 85876.804506471 1192957.8397632
+3	2829266 115058 13 68479 0.11 61.93 6183 26.6 26.6 164467.80000002 4374843.4800002
+2	2944324 182244 13 68479 0.11 61.93 6183 166 1024.7647196448 3680785.9541554 2571173900.0724
+

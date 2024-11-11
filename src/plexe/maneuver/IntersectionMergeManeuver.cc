@@ -151,7 +151,6 @@ IntersectionMergeRequest* IntersectionMergeManeuver::createIntersectionMergeRequ
 void IntersectionMergeManeuver::handleIntersectionMergeRequest(const IntersectionMergeRequest* msg)
 {
 
-  std::cout << "!!!!!handleIntersectionMergeRequest\n";
     if (msg->getDestinationId() != positionHelper->getId() || app->isInManeuver())
         return;
 

@@ -65,6 +65,7 @@ void BaseApp::initialize(int stage)
         ASSERT(plexe);
         plexeTraci = plexe->getCommandInterface();
         plexeTraciVehicle.reset(new traci::CommandInterface::Vehicle(plexeTraci, mobility->getExternalId()));
+
         positionHelper = FindModule<BasePositionHelper*>::findSubModule(getParentModule());
         protocol = FindModule<BaseProtocol*>::findSubModule(getParentModule());
         myId = positionHelper->getId();
