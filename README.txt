@@ -1,3 +1,7 @@
+This repository contains the Plexe project and in particular an implementation of the Overtake Maneuver.
+Refer to this thesis for more information:
+To execute the maneuver go to the ./examples/overtake directory and run the command plexe_run -u Cmdenv -c Overtake -r 0
+
 
 Plexe - The platooning extension for Veins
 
